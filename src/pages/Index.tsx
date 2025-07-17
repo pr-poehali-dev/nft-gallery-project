@@ -3,9 +3,37 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
+import { useState } from 'react';
 import Icon from '@/components/ui/icon';
 
 const Index = () => {
+  const [showBidModal, setShowBidModal] = useState(false);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [selectedAuction, setSelectedAuction] = useState(null);
+  const [bidAmount, setBidAmount] = useState('');
+  const [registerData, setRegisterData] = useState({ email: '', password: '', confirmPassword: '' });
+
+  const handleBidClick = (auction) => {
+    setSelectedAuction(auction);
+    setShowBidModal(true);
+  };
+
+  const handleBidSubmit = () => {
+    // Здесь будет логика отправки ставки
+    console.log('Ставка:', bidAmount, 'для аукциона:', selectedAuction);
+    setShowBidModal(false);
+    setBidAmount('');
+  };
+
+  const handleRegisterSubmit = () => {
+    // Здесь будет логика регистрации
+    console.log('Регистрация:', registerData);
+    setShowRegisterModal(false);
+    setRegisterData({ email: '', password: '', confirmPassword: '' });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-purple-50">
       {/* Header */}
@@ -28,9 +56,73 @@ const Index = () => {
                 <Icon name="Wallet" className="w-4 h-4 mr-2" />
                 Подключить
               </Button>
-              <Button size="sm" className="bg-purple-600 hover:bg-purple-700">
-                Войти
-              </Button>
+              <Dialog open={showRegisterModal} onOpenChange={setShowRegisterModal}>
+                <DialogTrigger asChild>
+                  <Button size="sm" className="bg-purple-600 hover:bg-purple-700">
+                    Регистрация
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-md">
+                  <DialogHeader>
+                    <DialogTitle>Регистрация на EP Platform</DialogTitle>
+                    <DialogDescription>
+                      Создайте аккаунт для участия в аукционах
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="email">Email</Label>
+                      <Input
+                        id="email"
+                        placeholder="your@email.com"
+                        value={registerData.email}
+                        onChange={(e) => setRegisterData({...registerData, email: e.target.value})}
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="password">Пароль</Label>
+                      <Input
+                        id="password"
+                        type="password"
+                        placeholder="••••••••"
+                        value={registerData.password}
+                        onChange={(e) => setRegisterData({...registerData, password: e.target.value})}
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="confirmPassword">Подтвердите пароль</Label>
+                      <Input
+                        id="confirmPassword"
+                        type="password"
+                        placeholder="••••••••"
+                        value={registerData.confirmPassword}
+                        onChange={(e) => setRegisterData({...registerData, confirmPassword: e.target.value})}
+                      />
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <input type="checkbox" id="terms" className="rounded" />
+                      <Label htmlFor="terms" className="text-sm">
+                        Я согласен с <a href="#" className="text-purple-600 hover:underline">условиями использования</a>
+                      </Label>
+                    </div>
+                    <div className="flex space-x-2">
+                      <Button 
+                        className="flex-1 bg-purple-600 hover:bg-purple-700"
+                        onClick={handleRegisterSubmit}
+                      >
+                        Зарегистрироваться
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        className="flex-1"
+                        onClick={() => setShowRegisterModal(false)}
+                      >
+                        Отмена
+                      </Button>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
         </div>
@@ -171,7 +263,7 @@ const Index = () => {
                 <div className="flex justify-between items-center mb-4">
                   <div>
                     <p className="text-sm text-slate-500">Текущая ставка</p>
-                    <p className="text-2xl font-bold text-purple-600">2.4 ETH</p>
+                    <p className="text-2xl font-bold text-black">145 000 ₽</p>
                   </div>
                   <div className="text-right">
                     <p className="text-sm text-slate-500">Осталось</p>
@@ -187,7 +279,11 @@ const Index = () => {
                     <Icon name="Users" className="w-4 h-4 text-slate-400 mr-1" />
                     <span className="text-sm text-slate-600">12 ставок</span>
                   </div>
-                  <Button size="sm" className="bg-purple-600 hover:bg-purple-700">
+                  <Button 
+                    size="sm" 
+                    className="bg-purple-600 hover:bg-purple-700"
+                    onClick={() => handleBidClick({ id: 1, name: 'Neon Dreams #001', currentBid: 145000 })}
+                  >
                     Сделать ставку
                   </Button>
                 </div>
@@ -215,7 +311,7 @@ const Index = () => {
                 <div className="flex justify-between items-center mb-4">
                   <div>
                     <p className="text-sm text-slate-500">Текущая ставка</p>
-                    <p className="text-2xl font-bold text-[#000000] text-left">5.7 ETH</p>
+                    <p className="text-2xl font-bold text-black">342 000 ₽</p>
                   </div>
                   <div className="text-right">
                     <p className="text-sm text-slate-500">Осталось</p>
@@ -231,7 +327,11 @@ const Index = () => {
                     <Icon name="Users" className="w-4 h-4 text-slate-400 mr-1" />
                     <span className="text-sm text-slate-600">28 ставок</span>
                   </div>
-                  <Button size="sm" className="bg-purple-600 hover:bg-purple-700">
+                  <Button 
+                    size="sm" 
+                    className="bg-purple-600 hover:bg-purple-700"
+                    onClick={() => handleBidClick({ id: 2, name: 'Cyber Wave #042', currentBid: 342000 })}
+                  >
                     Сделать ставку
                   </Button>
                 </div>
@@ -259,7 +359,7 @@ const Index = () => {
                 <div className="flex justify-between items-center mb-4">
                   <div>
                     <p className="text-sm text-slate-500">Текущая ставка</p>
-                    <p className="text-2xl font-bold text-purple-600">3.2 ETH</p>
+                    <p className="text-2xl font-bold text-black">192 000 ₽</p>
                   </div>
                   <div className="text-right">
                     <p className="text-sm text-slate-500">Осталось</p>
@@ -275,7 +375,11 @@ const Index = () => {
                     <Icon name="Users" className="w-4 h-4 text-slate-400 mr-1" />
                     <span className="text-sm text-slate-600">18 ставок</span>
                   </div>
-                  <Button size="sm" className="bg-purple-600 hover:bg-purple-700">
+                  <Button 
+                    size="sm" 
+                    className="bg-purple-600 hover:bg-purple-700"
+                    onClick={() => handleBidClick({ id: 3, name: 'Fire Gradient #025', currentBid: 192000 })}
+                  >
                     Сделать ставку
                   </Button>
                 </div>
@@ -439,6 +543,74 @@ const Index = () => {
           </div>
         </div>
       </footer>
+
+      {/* Bid Modal */}
+      <Dialog open={showBidModal} onOpenChange={setShowBidModal}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Сделать ставку</DialogTitle>
+            <DialogDescription>
+              {selectedAuction && `Аукцион: ${selectedAuction.name}`}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="bg-slate-50 p-4 rounded-lg">
+              <div className="flex justify-between items-center mb-2">
+                <span className="text-sm text-slate-600">Текущая ставка:</span>
+                <span className="text-lg font-semibold text-black">
+                  {selectedAuction ? selectedAuction.currentBid.toLocaleString() : '0'} ₽
+                </span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-slate-600">Минимальная ставка:</span>
+                <span className="text-sm font-medium text-slate-900">
+                  {selectedAuction ? (selectedAuction.currentBid + 5000).toLocaleString() : '0'} ₽
+                </span>
+              </div>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="bidAmount">Ваша ставка (₽)</Label>
+              <Input
+                id="bidAmount"
+                type="number"
+                placeholder={selectedAuction ? (selectedAuction.currentBid + 5000).toString() : '0'}
+                value={bidAmount}
+                onChange={(e) => setBidAmount(e.target.value)}
+                className="text-lg"
+              />
+              <p className="text-xs text-slate-500">
+                Комиссия платформы: 30% с продажи
+              </p>
+            </div>
+            <div className="flex space-x-2">
+              <Button 
+                className="flex-1 bg-purple-600 hover:bg-purple-700"
+                onClick={handleBidSubmit}
+                disabled={!bidAmount || Number(bidAmount) <= (selectedAuction?.currentBid || 0)}
+              >
+                <Icon name="Gavel" className="w-4 h-4 mr-2" />
+                Сделать ставку
+              </Button>
+              <Button 
+                variant="outline" 
+                className="flex-1"
+                onClick={() => setShowBidModal(false)}
+              >
+                Отмена
+              </Button>
+            </div>
+            <div className="bg-yellow-50 p-3 rounded-lg">
+              <div className="flex items-start space-x-2">
+                <Icon name="AlertTriangle" className="w-4 h-4 text-yellow-600 mt-0.5" />
+                <div className="text-sm">
+                  <p className="font-medium text-yellow-800">Внимание!</p>
+                  <p className="text-yellow-700">Ставка не может быть отменена после подтверждения.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
