@@ -44,7 +44,7 @@ const Index = () => {
               <div className="w-8 h-8 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
                 <Icon name="Image" className="w-5 h-5 text-white" />
               </div>
-              <h1 className="text-xl font-bold text-purple-900">EP Platform</h1>
+              <h1 className="text-xl font-bold text-[#000000]">Dark Forge EP</h1>
             </div>
             <nav className="hidden md:flex space-x-8">
               <a href="#" className="text-slate-600 hover:text-purple-600 transition-colors">Аукционы</a>
