@@ -215,7 +215,7 @@ const Index = () => {
                 <div className="flex justify-between items-center mb-4">
                   <div>
                     <p className="text-sm text-slate-500">Текущая ставка</p>
-                    <p className="text-2xl font-bold text-purple-600">5.7 ETH</p>
+                    <p className="text-2xl font-bold text-[#000000] text-left">5.7 ETH</p>
                   </div>
                   <div className="text-right">
                     <p className="text-sm text-slate-500">Осталось</p>
