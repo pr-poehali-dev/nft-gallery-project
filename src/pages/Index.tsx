@@ -40,16 +40,19 @@ const Index = () => {
       <header className="bg-white/80 backdrop-blur-sm border-b border-purple-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
-                <Icon name="Image" className="w-5 h-5 text-white" />
-              </div>
+            <div className="flex items-center space-x-3">
+              <img 
+                src="https://cdn.poehali.dev/files/686bb13c-d4cc-481f-a3eb-73c8f000e03f.png" 
+                alt="Dark Forge EP" 
+                className="w-10 h-10 object-contain"
+              />
               <h1 className="text-xl font-bold text-[#000000]">Dark Forge EP</h1>
             </div>
             <nav className="hidden md:flex space-x-8">
               <a href="#" className="text-slate-600 hover:text-purple-600 transition-colors">Аукционы</a>
               <a href="#" className="text-slate-600 hover:text-purple-600 transition-colors">Загрузить</a>
               <a href="#" className="text-slate-600 hover:text-purple-600 transition-colors">Профиль</a>
+              <a href="/admin" className="text-slate-600 hover:text-purple-600 transition-colors">Админка</a>
             </nav>
             <div className="flex items-center space-x-4">
               <Button variant="outline" size="sm">
@@ -279,13 +282,23 @@ const Index = () => {
                     <Icon name="Users" className="w-4 h-4 text-slate-400 mr-1" />
                     <span className="text-sm text-slate-600">12 ставок</span>
                   </div>
-                  <Button 
-                    size="sm" 
-                    className="bg-purple-600 hover:bg-purple-700"
-                    onClick={() => handleBidClick({ id: 1, name: 'Neon Dreams #001', currentBid: 145000 })}
-                  >
-                    Сделать ставку
-                  </Button>
+                  <div className="flex items-center space-x-2">
+                    <Button 
+                      size="sm" 
+                      className="bg-purple-600 hover:bg-purple-700"
+                      onClick={() => handleBidClick({ id: 1, name: 'Neon Dreams #001', currentBid: 145000 })}
+                    >
+                      Сделать ставку
+                    </Button>
+                    <Button 
+                      size="sm" 
+                      variant="outline"
+                      className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                      onClick={() => alert('Жалоба отправлена!')}
+                    >
+                      <Icon name="Flag" className="w-4 h-4" />
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -327,13 +340,23 @@ const Index = () => {
                     <Icon name="Users" className="w-4 h-4 text-slate-400 mr-1" />
                     <span className="text-sm text-slate-600">28 ставок</span>
                   </div>
-                  <Button 
-                    size="sm" 
-                    className="bg-purple-600 hover:bg-purple-700"
-                    onClick={() => handleBidClick({ id: 2, name: 'Cyber Wave #042', currentBid: 342000 })}
-                  >
-                    Сделать ставку
-                  </Button>
+                  <div className="flex items-center space-x-2">
+                    <Button 
+                      size="sm" 
+                      className="bg-purple-600 hover:bg-purple-700"
+                      onClick={() => handleBidClick({ id: 2, name: 'Cyber Wave #042', currentBid: 342000 })}
+                    >
+                      Сделать ставку
+                    </Button>
+                    <Button 
+                      size="sm" 
+                      variant="outline"
+                      className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                      onClick={() => alert('Жалоба отправлена!')}
+                    >
+                      <Icon name="Flag" className="w-4 h-4" />
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -375,13 +398,23 @@ const Index = () => {
                     <Icon name="Users" className="w-4 h-4 text-slate-400 mr-1" />
                     <span className="text-sm text-slate-600">18 ставок</span>
                   </div>
-                  <Button 
-                    size="sm" 
-                    className="bg-purple-600 hover:bg-purple-700"
-                    onClick={() => handleBidClick({ id: 3, name: 'Fire Gradient #025', currentBid: 192000 })}
-                  >
-                    Сделать ставку
-                  </Button>
+                  <div className="flex items-center space-x-2">
+                    <Button 
+                      size="sm" 
+                      className="bg-purple-600 hover:bg-purple-700"
+                      onClick={() => handleBidClick({ id: 3, name: 'Fire Gradient #025', currentBid: 192000 })}
+                    >
+                      Сделать ставку
+                    </Button>
+                    <Button 
+                      size="sm" 
+                      variant="outline"
+                      className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                      onClick={() => alert('Жалоба отправлена!')}
+                    >
+                      <Icon name="Flag" className="w-4 h-4" />
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -471,10 +504,12 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
-              <div className="flex items-center space-x-2 mb-4">
-                <div className="w-8 h-8 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
-                  <Icon name="Image" className="w-5 h-5 text-white" />
-                </div>
+              <div className="flex items-center space-x-3 mb-4">
+                <img 
+                  src="https://cdn.poehali.dev/files/686bb13c-d4cc-481f-a3eb-73c8f000e03f.png" 
+                  alt="Dark Forge EP" 
+                  className="w-8 h-8 object-contain"
+                />
                 <h3 className="text-xl font-bold">EP Platform</h3>
               </div>
               <p className="text-slate-400 mb-4">
